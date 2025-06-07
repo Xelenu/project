@@ -95,12 +95,12 @@
     <span class="letter">t</span>
     <span class="letter">.</span>
   </div>
-  <p class="motw-text">What do you say when you need help?</p>
+  <p class="motw-text">Why did the chicken cross the road?</p>
 
   <div class="form-container">
     <form id="answerForm" autocomplete="off">
       <input type="password" id="answer" name="answer" required autocomplete="off">
-      <button type="submit">Check</button>
+      <button type="submit">Am I correct?</button>
     </form>
   </div>
   <b class="motw-text"> </b>
@@ -111,7 +111,7 @@
       const data = JSON.stringify({ answer });
 
       try {
-        const response = await fetch('https://chesao-worker.stilla-rrms-wlwv-k12-or-us.workers.dev/verify', {
+        const response = await fetch('...', {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           body: data
