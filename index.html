@@ -6,6 +6,10 @@
   <title>Detent.</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9773017729831801" crossorigin="anonymous"></script>
   <style>
+    :root {
+      --neon-color: #a9a9a9;
+    }
+
     body {
       display: flex;
       flex-direction: column;
@@ -19,44 +23,70 @@
       box-sizing: border-box;
     }
 
-    .motw-text {
-      font-size: 3rem;
-      font-weight: bold;
-      color: #d3d3d3;
-      text-shadow: 0 0 1px #d3d3d3, 0 0 2px #d3d3d3, 0 0 4px #d3d3d3;
-      margin-top: 20px;
+    .title {
       text-align: center;
-      font-family: Impact, sans-serif;
-      animation: fadeInZoom 1.5s ease-in-out;
     }
 
     .letter {
       display: inline-block;
-      animation: fadeInZoom 1.5s ease-in-out;
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--neon-color);
+      text-shadow: 0 0 1px var(--neon-color), 0 0 2px var(--neon-color), 0 0 4px var(--neon-color);
+      font-family: Impact, sans-serif;
+      animation: fadeInZoom 1.8s ease-in-out;
+      animation-fill-mode: forwards;
+      opacity: 0;
     }
 
     .letter:nth-child(1) { animation-delay: 0s; }
-    .letter:nth-child(2) { animation-delay: 0.1s; }
-    .letter:nth-child(3) { animation-delay: 0.2s; }
-    .letter:nth-child(4) { animation-delay: 0.3s; }
-    .letter:nth-child(5) { animation-delay: 0.4s; }
-    .letter:nth-child(6) { animation-delay: 0.5s; }
-    .letter:nth-child(7) { animation-delay: 0.6s; }
+    .letter:nth-child(2) { animation-delay: 0.2s; }
+    .letter:nth-child(3) { animation-delay: 0.4s; }
+    .letter:nth-child(4) { animation-delay: 0.6s; }
+    .letter:nth-child(5) { animation-delay: 0.8s; }
+    .letter:nth-child(6) { animation-delay: 1.0s; }
+    .letter:nth-child(7) { animation-delay: 1.2s; }
+
+    .image-container {
+      animation: fadeInZoom 1.8s ease-in-out 1.4s;
+      animation-fill-mode: forwards;
+      opacity: 0;
+    }
+
+    .neon-image {
+      width: 400px;
+      box-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color);
+    }
+
+    p.motw-text {
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--neon-color);
+      text-shadow: 0 0 1px var(--neon-color), 0 0 2px var(--neon-color), 0 0 4px var(--neon-color);
+      margin-top: 20px;
+      text-align: center;
+      font-family: Impact, sans-serif;
+      animation: fadeInZoom 1.8s ease-in-out 1.6s;
+      animation-fill-mode: forwards;
+      opacity: 0;
+    }
 
     .form-container {
       margin-top: 20px;
       text-align: center;
-      animation: fadeInZoom 1.5s ease-in-out;
+      animation: fadeInZoom 1.8s ease-in-out 1.8s;
+      animation-fill-mode: forwards;
+      opacity: 0;
     }
 
     .form-container input {
       padding: 15px;
       font-size: 1.8rem;
       background-color: black;
-      color: #d3d3d3;
-      border: 1px solid #d3d3d3;
+      color: var(--neon-color);
+      border: 1px solid var(--neon-color);
       border-radius: 5px;
-      box-shadow: 0 0 5px #d3d3d3, 0 0 10px #d3d3d3;
+      box-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color);
       font-family: Impact, sans-serif;
     }
 
@@ -64,29 +94,29 @@
       padding: 15px 30px;
       font-size: 1.8rem;
       background-color: black;
-      color: #d3d3d3;
+      color: var(--neon-color);
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      text-shadow: 0 0 1px #d3d3d3, 0 0 2px #d3d3d3;
-      box-shadow: 0 0 5px #d3d3d3, 0 0 10px #d3d3d3;
+      text-shadow: 0 0 1px var(--neon-color), 0 0 2px var(--neon-color);
+      box-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color);
       font-family: Impact, sans-serif;
     }
 
     @keyframes fadeInZoom {
       from {
         opacity: 0;
-        transform: scale(0.7);
+        transform: scale(0.5) rotate(-5deg);
       }
       to {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) rotate(0deg);
       }
     }
   </style>
 </head>
 <body>
-  <div class="motw-text">
+  <div class="title">
     <span class="letter">D</span>
     <span class="letter">e</span>
     <span class="letter">t</span>
@@ -95,12 +125,15 @@
     <span class="letter">t</span>
     <span class="letter">.</span>
   </div>
+  <div class="image-container">
+    <img src="/m/31ec9WdDWFL._SX522_-removebg-preview.png" alt="Image" class="neon-image">
+  </div>
   <p class="motw-text">Why did the chicken cross the road?</p>
 
   <div class="form-container">
     <form id="answerForm" autocomplete="off">
       <input type="password" id="answer" name="answer" required autocomplete="off">
-      <button type="submit">Am I correct?</button>
+      <button type="submit">Check</button>
     </form>
   </div>
   <b class="motw-text"> </b>
@@ -111,7 +144,7 @@
       const data = JSON.stringify({ answer });
 
       try {
-        const response = await fetch('...', {
+        const response = await fetch('https://chesao-worker.stilla-rrms-wlwv-k12-or-us.workers.dev/verify', {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           body: data
@@ -127,7 +160,7 @@
           overlay.style.width = '100%';
           overlay.style.height = '100%';
           overlay.style.backgroundColor = 'black';
-          overlay.style.color = '#d3d3d3';
+          overlay.style.color = '#a9a9a9';
           overlay.style.display = 'flex';
           overlay.style.alignItems = 'center';
           overlay.style.justifyContent = 'center';
