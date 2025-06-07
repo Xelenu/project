@@ -131,7 +131,7 @@
     <span class="letter">.</span>
   </div>
   <div class="image-container">
-    <img src="/m/image-removebg-preview%20(3).png" alt="Image" class="neon-image" draggable=false>
+    <img src="/m/image-removebg-preview%20(3).png" alt="Image" class="neon-image">
   </div>
   <p class="motw-text question">Why did the chicken cross the road?</p>
 
@@ -158,7 +158,7 @@
 
         const result = await response.json();
 
-        if (result.success && result.redirect) {
+        if (result.success && result.html) {
           const overlay = document.createElement('div');
           overlay.style.position = 'fixed';
           overlay.style.top = 0;
@@ -174,48 +174,16 @@
           overlay.style.fontSize = '2.2rem';
           overlay.style.zIndex = 9999;
           overlay.style.fontFamily = 'Impact, sans-serif';
-          overlay.textContent = "You are unable to view the website again, refresh the page to get back!";
+          overlay.textContent = "Loading content...";
 
           document.body.appendChild(overlay);
 
           setTimeout(() => {
-            const newTab = window.open('about:blank', '_blank');
-            if (newTab) {
-              newTab.document.write(`
-                <html>
-                <head>
-                  <title>‎ </title>
-                  <style>
-                    html, body {
-                      margin: 0;
-                      padding: 0;
-                      height: 100%;
-                      overflow: hidden;
-                      background-color: black;
-                      display: flex;
-                    }
-                    body {
-                      flex: 1;
-                    }
-                    iframe {
-                      flex: 1;
-                      border: none;
-                    }
-                  </style>
-                </head>
-                <body>
-                  <iframe src="${result.redirect}" allowfullscreen></iframe>
-                </body>
-                </html>
-              `);
-              newTab.document.close();
-              setTimeout(() => {
-                window.close();
-              }, 500);
-            } else {
-              alert("Popup blocked.");
-            }
-          }, 0);
+            // Inject the HTML directly into the body
+            document.body.innerHTML = result.html;
+            // Remove the overlay after injection
+            overlay.remove();
+          }, 1000); // Brief delay to show the overlay
         } else {
           alert(result.message || 'Wrong!');
         }
