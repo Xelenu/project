@@ -150,7 +150,7 @@
       const data = JSON.stringify({ answer });
 
       try {
-        const response = await fetch('https://chesao-worker.stilla-rrms-wlwv-k12-or-us.workers.dev/verify', {
+        const response = await fetch('https://api.detent.cv/verify', {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           body: data
