@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detent.</title>
+  <title>Classroom</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9773017729831801" crossorigin="anonymous"></script>
   <style>
     :root {
@@ -67,10 +67,13 @@
       margin-top: 20px;
       text-align: center;
       font-family: Impact, sans-serif;
-      animation: fadeInZoom 1.8s ease-in-out 1.6s;
+      animation: fadeInZoom 1.8s ease-in-out;
       animation-fill-mode: forwards;
       opacity: 0;
     }
+
+    p.motw-text.question { animation-delay: 1.6s; }
+    p.motw-text.footer { animation-delay: 2.0s; margin-top: 40px; }
 
     .form-container {
       margin-top: 20px;
@@ -127,17 +130,18 @@
     <span class="letter">.</span>
   </div>
   <div class="image-container">
-    <img src="/m/31ec9WdDWFL._SX522_-removebg-preview.png" alt="Image" class="neon-image" draggable=false>
+    <img src="/m/31ec9WdDWFL._SX522_-removebg-preview.png" alt="Image" class="neon-image">
   </div>
-  <p class="motw-text">Why did the chicken cross the road?</p>
+  <p class="motw-text question">Why did the chicken cross the road?</p>
 
   <div class="form-container">
     <form id="answerForm" autocomplete="off">
       <input type="password" id="answer" name="answer" required autocomplete="off">
-      <button type="submit">Am I correct?</button>
+      <button type="submit">Check</button>
     </form>
   </div>
   <b class="motw-text"> </b>
+  <p class="motw-text footer">6/7/25, the start of Detent.</p>
   <script>
     document.getElementById('answerForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -219,6 +223,5 @@
       }
     });
   </script>
-  <b class="motw-text">6/7/25, the start of Detent.</b>
 </body>
 </html>
