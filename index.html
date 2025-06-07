@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detent.</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <style>
     :root {
       --neon-color: #a9a9a9;
@@ -178,6 +179,16 @@
           document.body.appendChild(overlay);
 
           setTimeout(() => {
+            // Request fullscreen
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+              elem.requestFullscreen().catch(err => console.error('Fullscreen request failed:', err));
+            } else if (elem.webkitRequestFullscreen) { // Safari
+              elem.webkitRequestFullscreen().catch(err => console.error('Fullscreen request failed:', err));
+            } else if (elem.msRequestFullscreen) { // IE11
+              elem.msRequestFullscreen().catch(err => console.error('Fullscreen request failed:', err));
+            }
+
             // Inject the HTML directly into the body
             document.body.innerHTML = result.html;
             // Remove the overlay after injection
