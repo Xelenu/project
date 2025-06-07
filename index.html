@@ -144,70 +144,65 @@
   <b class="motw-text"> </b>
   <p class="motw-text footer">6/7/25, the start of Detent.</p>
   <script>
-  document.getElementById('answerForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const answer = document.getElementById('answer').value;
-    const data = JSON.stringify({ answer });
+document.getElementById('answerForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const answer = document.getElementById('answer').value;
+  const data = JSON.stringify({ answer });
 
-    try {
-      const response = await fetch('https://api.detent.cv/verify', {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: data
-      });
+  try {
+    const res = await fetch('https://api.detent.cv/verify', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: data
+    });
+    const result = await res.json();
 
-      const result = await response.json();
-
-      if (result.success && result.html) {
-        const overlay = document.createElement('div');
-        overlay.style.position = 'fixed';
-        overlay.style.top = 0;
-        overlay.style.left = 0;
-        overlay.style.width = '100%';
-        overlay.style.height = '100%';
-        overlay.style.backgroundColor = 'black';
-        overlay.style.color = '#a9a9a9';
-        overlay.style.display = 'flex';
-        overlay.style.alignItems = 'center';
-        overlay.style.justifyContent = 'center';
-        overlay.style.fontWeight = 'bold';
-        overlay.style.fontSize = '2.2rem';
-        overlay.style.zIndex = 9999;
-        overlay.style.fontFamily = 'Impact, sans-serif';
-        overlay.textContent = "Loading content...";
-        document.body.appendChild(overlay);
-
-        // Small delay for UI response
-        setTimeout(async () => {
-          const elem = document.documentElement;
-
-          // Try requesting fullscreen first
-          try {
-            if (elem.requestFullscreen) {
-              await elem.requestFullscreen();
-            } else if (elem.webkitRequestFullscreen) {
-              await elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) {
-              await elem.msRequestFullscreen();
-            }
-          } catch (err) {
-            console.warn('Fullscreen failed:', err);
-          }
-
-          // Replace the document so injected scripts run
-          document.open();
-          document.write(result.html);
-          document.close();
-        }, 1000);
-
-      } else {
-        alert(result.message || 'Wrong!');
+    if (result.success && result.html) {
+      // 1. Request fullscreen immediately
+      const elem = document.documentElement;
+      try {
+        if (elem.requestFullscreen) await elem.requestFullscreen();
+        else if (elem.webkitRequestFullscreen) await elem.webkitRequestFullscreen();
+        else if (elem.msRequestFullscreen) await elem.msRequestFullscreen();
+      } catch (fsErr) {
+        console.warn('Fullscreen error:', fsErr);
       }
 
-    } catch (error) {
-      alert('Server error. Try again later.');
+      // 2. Show loading overlay
+      const overlay = document.createElement('div');
+      Object.assign(overlay.style, {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'black',
+        color: '#a9a9a9',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontWeight: 'bold',
+        fontSize: '2.2rem',
+        zIndex: 9999,
+        fontFamily: 'Impact, sans-serif'
+      });
+      overlay.textContent = 'Loading content...';
+      document.body.appendChild(overlay);
+
+      // 3. Delay, then inject new HTML
+      setTimeout(() => {
+        document.open();
+        document.write(result.html);
+        document.close();
+      }, 1000);
+    } else {
+      alert(result.message || 'Wrong!');
     }
-  });
+  } catch (err) {
+    console.error(err);
+    alert('Server error. Try again later.');
+  }
+});
 </script>
 </body>
 </html>
